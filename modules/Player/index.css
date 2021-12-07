@@ -2,6 +2,7 @@
 .player {
   width: 370px;
   margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
 
 .timeline {
@@ -68,6 +69,45 @@
 .player-chunk-overlay{
   position: absolute;
   user-select: none;
+}
+
+.question{
+  background: cornflowerblue;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+
+}
+
+.question-answers{
+  margin: 10px;
+  display: flex;
+
+}
+
+.question-answers button{
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: white;
+  padding: 5px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.question-answers button + button{
+  margin-left: 15px;
+}
+
+
+
+
+
+.black-brash{
+  background: url("../../img/brash.png") no-repeat;
+  background-size: contain;
+  color: #fff;
+  text-align: center;
 }
 
 @keyframes scale {

@@ -28,8 +28,6 @@ function initPlayer({target, slides, delay}) {
     timer;
 
   slides.forEach((el, idx) => {
-    const {url, alt, overlays} = el
-    console.log(el)
     timelineChunks += generateTimelineChunks(idx);
     playerChunks += generatePlayerChunks(el, idx);
   })
@@ -67,11 +65,17 @@ function initPlayer({target, slides, delay}) {
   }
 
   function generatePlayerChunks(el, idx) {
-    const {url, alt, overlays} = el;
+    const {url, alt, filter, overlays} = el;
+
+    const style = [];
+
+    if (filter) {
+      style.push(`filter: ${filter.join(' ')}`);
+    }
 
     return `
     <div class="player-chunk ${idx === 0 ? 'player-chunk-active' : ''}">
-      <img src="${url}" alt="${alt || 'image'}">
+      <img src="${url}" alt="${alt || 'image'}" style="${style.join(';')}">
       ${generateOverlays(overlays)}
     </div>`;
   }
@@ -85,16 +89,31 @@ function initPlayer({target, slides, delay}) {
     for (const el of overlays) {
       const styles = (el.styles ? Object
         .entries(el.styles) : [])
-        .map((el) => el.join(':'))
+        .map(el => el.join(':'))
         .join(';');
 
-      layout += `<div class="player-chunk-overlay" style="${styles}">${renderOverlay(el)}</div>`;
+      const classes = el.classes ? el.classes.join(' ') : '';
+
+      layout += `<div class="player-chunk-overlay ${classes}" style="${styles}">${renderOverlay(el)}</div>`;
     }
 
     function renderOverlay(el) {
       if (el.type === 'text') {
         return el.value;
       }
+
+      if(el.type === 'question'){
+        return `
+          <div class="question">
+            ${el.question}
+            <div class="question-answers">
+              <button value="1">${el.variants[0] || 'Yes'}</button>
+              <button value="2">${el.variants[1] || 'No'}</button>
+            </div>
+          </div>
+        `
+      }
+
       if (el.type === 'img') {
         return `<img src="${el.value}" alt="${el.alt}">`;
       }
