@@ -1,12 +1,14 @@
-initPlayer({
+import {Player} from './modules/player/player.js';
+
+new Player({
   target: '.root',
   slides: [
     {
       url: 'img/chunk-1.jpeg',
       overlays: [
         {
-          type: 'text',
-          value: 'Hello',
+          type: 'Text',
+          text: 'Hello',
           styles: {
             color: 'green',
             font: '60px/14px sans-serif',
@@ -21,8 +23,8 @@ initPlayer({
           }
         },
         {
-          type: 'text',
-          value: 'world',
+          type: 'Text',
+          text: 'world',
           styles: {
             color: 'orange',
             font: '40px/14px sans-serif',
@@ -43,7 +45,7 @@ initPlayer({
       filter: ['contrast(150%)', 'blur(2px)'],
       overlays: [
         {
-          type: 'question',
+          type: 'Question',
           question: 'Do you like ice cream?',
           variants: ['Yes', 'No'],
           styles: {
@@ -60,8 +62,8 @@ initPlayer({
       url: 'img/chunk-3.jpeg',
       overlays: [
         {
-          type: 'text',
-          value: 'You can do it',
+          type: 'Text',
+          text: 'You can do it',
           styles: {
             color: 'white',
             font: '2rem/14px sans-serif',
@@ -82,3 +84,4 @@ initPlayer({
   ],
   delay: 2,
 })
+
